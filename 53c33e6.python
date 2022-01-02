@@ -1,0 +1,6 @@
+from itertools import count
+
+ROWS, COLS = 3, 7
+c = count()
+grid = [[next(c) for _ in range(COLS)] for _ in range(ROWS)]
+grid

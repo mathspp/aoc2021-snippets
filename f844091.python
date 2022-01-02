@@ -1,0 +1,8 @@
+min_cost = None
+for pos in range(min(crabs), max(crabs) + 1):
+    fuel_cost = 0
+    for crab in crabs:
+        fuel_cost += abs(pos - crab)
+    if min_cost is None or fuel_cost < min_cost:
+        min_cost = fuel_cost
+print(min_cost)

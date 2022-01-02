@@ -1,0 +1,5 @@
+def fold_point(point, coord, value):
+    x, y = point
+    vx = value if coord == "x" else float("+inf")
+    vy = value if coord == "y" else float("+inf")
+    return (x if x < vx else 2 * vx - x, y if y < vy else 2 * vy - y)

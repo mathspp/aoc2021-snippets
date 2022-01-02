@@ -1,0 +1,14 @@
+count = 0
+queue = deque([["start"]])
+while queue:
+    path = *_, last_visited = queue.pop()  # <-
+    if last_visited == "end":
+        count += 1
+        continue
+
+    queue.extendleft([
+        path + [neighbour] for neighbour in graph[last_visited]  # <-
+        if not (neighbour.islower() and neighbour in path)  # <-
+    ])
+
+print(count)

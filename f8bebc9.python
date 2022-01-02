@@ -1,0 +1,11 @@
+def fuel_cost(distance):
+    return distance * (distance + 1) // 2
+
+def total_fuel_cost(pos):
+    return sum(fuel_cost(abs(pos - crab)) for crab in crabs)
+
+with open(INPUT_FILE, "r") as f:
+    crabs = [int(num) for num in f.readline().split(",")]
+
+low, high = min(crabs), max(crabs)
+print(ternary_search(low, high, total_fuel_cost))

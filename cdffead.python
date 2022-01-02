@@ -1,0 +1,26 @@
+from collections import deque
+
+with open(INPUT_FILE, "r") as f:
+    crabs = deque(sorted(int(num) for num in f.readline().split(",")))
+
+# Initialise `p`, `t`, `l`, and `r`.
+p = crabs[0]
+t = 0
+while crabs[0] == p:
+    t += 1
+    crabs.popleft()
+l, r = 0, len(crabs)
+# Initialise cost `c`.
+c = sum(abs(p - crab) for crab in crabs)
+
+while l + t - r < 0:
+    c += (crabs[0] - p) * (l + t - r)
+    l += t
+    t = 0
+    p = crabs[0]
+    while crabs[0] == p:
+        t += 1
+        crabs.popleft()
+    r -= t
+
+print(c)

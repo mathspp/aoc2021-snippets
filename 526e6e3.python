@@ -1,0 +1,4 @@
+from itertools import chain
+
+flat_grid = list(chain.from_iterable(grid))
+flat_grid

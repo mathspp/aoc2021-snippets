@@ -1,0 +1,14 @@
+from functools import partial
+
+def fuel_cost(distance):
+    return distance * (distance + 1) // 2
+
+def total_fuel_cost(crabs, pos):
+    return sum(fuel_cost(abs(pos - crab)) for crab in crabs)
+
+with open(INPUT_FILE, "r") as f:
+    crabs = [int(num) for num in f.readline().split(",")]
+
+low, high = min(crabs), max(crabs)
+function_to_minimise = partial(total_fuel_cost, crabs)
+print(ternary_search(low, high, function_to_minimise))

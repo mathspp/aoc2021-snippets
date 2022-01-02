@@ -1,0 +1,45 @@
+from itertools import chain
+
+with open(INPUT_FILE, "r") as f:
+    grid = [[int(n) for n in line.strip()] for line in f]
+
+ROWS = len(grid)
+COLS = len(grid[0])
+
+# Flatten the grid:
+grid = list(chain.from_iterable(grid))
+
+def neighbouring_positions(flat_idx, rows=ROWS, cols=COLS):
+    r, c = divmod(flat_idx, cols)
+    shifts = [
+        (r + 1, c), (r + 1, c + 1), (r, c + 1), (r - 1, c + 1),
+        (r - 1, c), (r - 1, c - 1), (r, c - 1), (r + 1, c - 1),
+    ]
+    return [
+        r_ * cols + c_ for r_, c_ in shifts
+        if 0 <= r_ < rows and 0 <= c_ < cols
+    ]
+
+flashes = 0
+for _ in range(100):
+    to_flash = []
+
+    for idx in range(len(grid)):
+        grid[idx] += 1
+        if grid[idx] == 10:
+            flashes += 1
+            to_flash.append(idx)
+
+    while to_flash:
+        idx = to_flash.pop()
+        for idx_ in neighbouring_positions(idx):
+            grid[idx_] += 1
+            if grid[idx_] == 10:
+                flashes += 1
+                to_flash.append(idx_)
+
+    for idx in range(len(grid)):
+        if grid[idx] >= 10:
+            grid[idx] = 0
+
+print(flashes)

@@ -1,0 +1,18 @@
+WS = 3
+
+with open(INPUT_FILE, "r") as f:
+    depths = (int(line) for line in f)  # Using a lazy generator now.
+
+    # Start by putting `WS` elements inside `window`.
+    window = [next(depths) for _ in range(WS)]
+
+    count = 0
+    # When we get here, `depths` is already missing some elements from the beginning,
+    # so we can already start comparing depth values.
+    for elem in depths:
+        window.append(elem)
+        if window[0] < window[-1]:
+            count += 1
+        window.pop(0)  # Get rid of the oldest element in the window.
+
+    print(count)

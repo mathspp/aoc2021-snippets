@@ -1,0 +1,7 @@
+def pairwise(it):
+    from itertools import tee
+    it1, it2 = tee(it, 2)
+    next(it2)
+    yield from zip(it1, it2)
+
+print(list(pairwise(range(5))))

@@ -1,0 +1,14 @@
+count = 0
+stack = deque([["start"]])
+while stack:
+    path = *_, last_visited = stack.pop()
+    if last_visited == "end":
+        count += 1
+        continue
+
+    stack.extend([
+        path + [neighbour] for neighbour in graph[last_visited]
+        if not (neighbour.islower() and neighbour in path)
+    ])
+
+print(count)

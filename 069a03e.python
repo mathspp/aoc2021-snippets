@@ -1,0 +1,10 @@
+# Create a "canvas" to paint the final result on.
+width = 1 + max(x for x, _ in folded)
+height = 1 + max(y for _, y in folded)
+canvas = [
+    # Character u2588 is a nice full box, see
+    # https://en.wikipedia.org/wiki/Box-drawing_character#Block_Elements
+    ["\u2588" if (x, y) in folded else " " for x in range(width)]
+    for y in range(height)
+]
+print("\n".join("".join(row) for row in canvas))
